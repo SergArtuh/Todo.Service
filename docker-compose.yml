@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+    mongo:
+        image: mongo
+        container_name: mongo
+        ports:
+            - 27017:27017
+        networks:
+            - mongodb_network
+        volumes:
+            - mongodbdata:/data/db
+            
+    todo.api:
+        image: serhiiartiukh/todolist
+        #build: ./
+        depends_on:
+            - mongo
+        ports:
+            - 5219:80
+        networks:
+            - mongodb_network
+        
+    
+volumes:
+    mongodbdata:
+    
+networks:
+    mongodb_network:
+        name: mongodb_network
+    
+    
+#docker run -d --rm --network todo-net  -p 27017:27017 --name mongo -v mongodbdata:/data/db mongo:latest
