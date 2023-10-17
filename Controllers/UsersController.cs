@@ -23,7 +23,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = "Administrator")]
-    public IActionResult Login()
+    public IActionResult Get()
     {
         var users = _securityService.GetUsers();
         return Ok(users.Select(userModel=>userModel.AsDto()));

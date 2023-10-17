@@ -10,5 +10,6 @@ public interface IRepository<T> where T : IEntity
     IEnumerable<T> GetAll();
     IEnumerable<T> GetAll(Expression<Func<T, bool>> filter);
     void Remove(Guid id);
+    void RemoveAll(Expression<Func<T, bool>> filter);
     void Update(T item);
 }

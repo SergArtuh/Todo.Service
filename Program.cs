@@ -6,6 +6,8 @@ using Todo.Service.Model.User;
 using Todo.Service.Model.Item;
 using Todo.Service.Services;
 using Todo.Service.Config;
+using Todo.Service.Application;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,11 +16,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 builder.Services.AddSecurity(builder.Configuration);
 builder.Services.AddMongo(builder.Configuration)
     .AddMongoRepository<UserModel>("Users")
+    .AddMongoRepository<ListModel>("Lists")
     .AddMongoRepository<ItemModel>("Items");
 
 var app = builder.Build();
@@ -28,6 +31,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseAdminUser();
 }
 
 app.UseAuthentication();

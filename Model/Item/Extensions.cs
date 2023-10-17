@@ -7,4 +7,9 @@ public static class Extensions
     {
         return new ItemDto(Id: itemModel.Id, Description: itemModel.Description, isDone: itemModel.isDone, dateCreated: itemModel.DateCreated);
     }
+
+    public static ListDto AsDto(this ListModel listModel)
+    {
+        return new ListDto(Id: listModel.Id, Name: listModel.Name, dateCreated: listModel.DateCreated);
+    }
 }

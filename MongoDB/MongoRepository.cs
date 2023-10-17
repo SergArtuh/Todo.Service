@@ -62,4 +62,9 @@ public class MongoRepository<T> : IRepository<T> where T: IEntity
         FilterDefinition<T> filterDefinition = filterBuilder.Eq(entity => entity.Id, id);
         itemCollection.DeleteOne(filterDefinition);
     }
+
+    public void RemoveAll(Expression<Func<T, bool>> filter)
+    {
+        itemCollection.DeleteMany(filter);
+    }
 }
